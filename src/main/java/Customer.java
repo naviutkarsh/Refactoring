@@ -5,7 +5,6 @@ import java.util.Vector;
 
 public class Customer {
   private final String _name;
-  private final Vector<Rental> _rentals = new Vector<>();
   private final List<Rental> myRentals = new ArrayList<Rental>();
 
   public Customer(String name) {
@@ -14,7 +13,6 @@ public class Customer {
 
   public void addRental(Rental rental) {
     myRentals.add(rental);
-    _rentals.addElement(rental);
   }
 
   public String getName() {
@@ -24,12 +22,11 @@ public class Customer {
   public String statement() {
     double totalAmount = 0;
     int frequentRenterPoints = 0;
-    Enumeration<Rental> rentals = _rentals.elements();
     String name = getName();
     String result = header(name);
 
 
-    for (Rental myRental : myRentals) {
+    for (Rental each : myRentals) {
       double thisAmount = 0;
 
       // determines the amount for each line
