@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Vector;
 
 public class Customer {
   private final String _name;
@@ -21,15 +19,14 @@ public class Customer {
 
   public String statement() {
     double totalAmount = 0;
-    int frequentRenterPoints = 0;
     String name = getName();
     String result = header(name);
 
 
     for (Rental each : myRentals) {
-      double thisAmount = 0;
 
-      // determines the amount for each line
+
+      double thisAmount = 0;
       switch (each.getMovie().getPriceCode()) {
         case Movie.REGULAR:
           thisAmount += 2;
@@ -46,22 +43,27 @@ public class Customer {
           break;
       }
 
-      // add frequent renter points
-      frequentRenterPoints++;
-
-      // add bonus for a two day new release rental
-      if (each.getMovie().getPriceCode() == Movie.NEW_RELEASE && each.getDaysRented() > 1)
-        frequentRenterPoints++;
-
       // show figures for this rental
       result += "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
       totalAmount += thisAmount;
     }
 
+    int frequentRenterPoints = frequentRenterPoints(this.myRentals);
+
     // add footer lines
     result += footer(totalAmount, frequentRenterPoints);
 
     return result;
+  }
+
+  private int frequentRenterPoints(List<Rental> rentals) {
+    int frequentRenterPoints = 0;
+    for (Rental each : rentals) {
+      frequentRenterPoints++;
+      if (each.getMovie().getPriceCode() == Movie.NEW_RELEASE && each.getDaysRented() > 1)
+        frequentRenterPoints++;
+    }
+    return frequentRenterPoints;
   }
 
   private String footer(double totalAmount, int frequentRenterPoints) {
