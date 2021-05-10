@@ -1,15 +1,19 @@
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Vector;
 
 public class Customer {
-  private String _name;
-  private Vector _rentals = new Vector();
+  private final String _name;
+  private final Vector<Rental> _rentals = new Vector<>();
+  private final List<Rental> myRentals = new ArrayList<Rental>();
 
   public Customer(String name) {
     this._name = name;
   }
 
   public void addRental(Rental rental) {
+    myRentals.add(rental);
     _rentals.addElement(rental);
   }
 
@@ -20,12 +24,13 @@ public class Customer {
   public String statement() {
     double totalAmount = 0;
     int frequentRenterPoints = 0;
-    Enumeration rentals = _rentals.elements();
-    String result = "Rental Record for " + getName() + "\n";
+    Enumeration<Rental> rentals = _rentals.elements();
+    String name = getName();
+    String result = header(name);
 
-    while (rentals.hasMoreElements()) {
+
+    for (Rental myRental : myRentals) {
       double thisAmount = 0;
-      Rental each = (Rental) rentals.nextElement();
 
       // determines the amount for each line
       switch (each.getMovie().getPriceCode()) {
@@ -52,14 +57,23 @@ public class Customer {
         frequentRenterPoints++;
 
       // show figures for this rental
-      result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
+      result += "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
       totalAmount += thisAmount;
     }
 
     // add footer lines
-    result += "You owed " + String.valueOf(totalAmount) + "\n";
-    result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+    result += footer(totalAmount, frequentRenterPoints);
 
     return result;
+  }
+
+  private String footer(double totalAmount, int frequentRenterPoints) {
+    String footer1 = "You owed " + totalAmount + "\n";
+    String footer2 = "You earned " + frequentRenterPoints + " frequent renter points";
+    return footer1 + footer2;
+  }
+
+  private String header(String name) {
+    return "Rental Record for " + name + "\n";
   }
 }
