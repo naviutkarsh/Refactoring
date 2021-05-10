@@ -18,35 +18,18 @@ public class Customer {
   }
 
   public String statement() {
-    double totalAmount = 0;
     String name = getName();
     String result = header(name);
+    double totalAmount = 0;
 
 
     for (Rental each : myRentals) {
-
-
-      double thisAmount = 0;
-      switch (each.getMovie().getPriceCode()) {
-        case Movie.REGULAR:
-          thisAmount += 2;
-          if (each.getDaysRented() > 2)
-            thisAmount += (each.getDaysRented() - 2) * 1.5;
-          break;
-        case Movie.NEW_RELEASE:
-          thisAmount += each.getDaysRented() * 3;
-          break;
-        case Movie.CHILDRENS:
-          thisAmount += 1.5;
-          if (each.getDaysRented() > 3)
-            thisAmount += (each.getDaysRented() - 3) * 1.5;
-          break;
-      }
-
-      // show figures for this rental
+      double thisAmount = amountFor(each);
       result += "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
       totalAmount += thisAmount;
     }
+
+    totalAmount = totalAmount(this.myRentals);
 
     int frequentRenterPoints = frequentRenterPoints(this.myRentals);
 
@@ -54,6 +37,34 @@ public class Customer {
     result += footer(totalAmount, frequentRenterPoints);
 
     return result;
+  }
+
+  private double totalAmount(List<Rental> rentals) {
+    double totalAmount = 0;
+    for (Rental each : rentals) {
+      totalAmount += amountFor(each);
+    }
+    return totalAmount;
+  }
+
+  private double amountFor(Rental rental) {
+    double thisAmount = 0;
+    switch (rental.getMovie().getPriceCode()) {
+      case Movie.REGULAR:
+        thisAmount += 2;
+        if (rental.getDaysRented() > 2)
+          thisAmount += (rental.getDaysRented() - 2) * 1.5;
+        break;
+      case Movie.NEW_RELEASE:
+        thisAmount += rental.getDaysRented() * 3;
+        break;
+      case Movie.CHILDRENS:
+        thisAmount += 1.5;
+        if (rental.getDaysRented() > 3)
+          thisAmount += (rental.getDaysRented() - 3) * 1.5;
+        break;
+    }
+    return thisAmount;
   }
 
   private int frequentRenterPoints(List<Rental> rentals) {
