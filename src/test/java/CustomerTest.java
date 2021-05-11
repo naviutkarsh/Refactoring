@@ -23,6 +23,6 @@ public class CustomerTest {
       "\tBambi\t1.5\n" +
       "\tToy Story\t3.0\n" +
       "You owed 19.0\n" +
-      "You earned 7 frequent renter points", customer.statement());
+      "You earned 7 frequent renter points", customer.statement(new Statement()));
   }
 }
