@@ -23,6 +23,10 @@ public abstract class Price {
 
   abstract double amount(int daysRented);
 
+  int renterPoints(int daysRented) {
+    return 1;
+  }
+
   private static class ChildrenPrice extends Price {
     public ChildrenPrice() {
       super(Movie.CHILDRENS);
@@ -40,6 +44,10 @@ public abstract class Price {
   private static class NewReleasePrice extends Price {
     public NewReleasePrice(int newRelease) {
       super(Movie.NEW_RELEASE);
+    }
+
+    int renterPoints(int daysRented) {
+      return daysRented > 1 ? 2 : 1;
     }
 
     double amount(int daysRented) {

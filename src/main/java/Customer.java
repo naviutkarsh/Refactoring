@@ -44,13 +44,12 @@ public class Customer {
   }
 
   private int frequentRenterPoints(List<Rental> rentals) {
-    int frequentRenterPoints = 0;
+    int totalRenterPoints = 0;
     for (Rental each : rentals) {
-      frequentRenterPoints++;
-      if (each.getMovie().getPriceCode() == Movie.NEW_RELEASE && each.getDaysRented() > 1)
-        frequentRenterPoints++;
+      int thisRenterPoints = each.renterPoints(each.getDaysRented());
+      totalRenterPoints += thisRenterPoints;
     }
-    return frequentRenterPoints;
+    return totalRenterPoints;
   }
 
   private String footer(double totalAmount, int frequentRenterPoints) {

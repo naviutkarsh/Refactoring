@@ -11,17 +11,16 @@ public class Movie {
     this.price = price;
   }
 
-  public int getPriceCode() {
-    return price.priceCode();
-  }
-
-
   public String getTitle() {
     return _title;
   }
 
   double amount(int daysRented) {
     return price.amount(daysRented);
+  }
+
+  int renterPoints(int daysRented) {
+    return this.price.renterPoints(daysRented);
   }
 
 }

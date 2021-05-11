@@ -19,4 +19,8 @@ class Rental {
     return getMovie().amount(getDaysRented());
   }
 
+  int renterPoints(int daysRented) {
+    return getMovie().renterPoints(daysRented);
+  }
+
 }
