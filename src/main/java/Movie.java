@@ -6,18 +6,15 @@ public class Movie {
   private String _title;
   private Price price;
 
-  public Movie(String title, int priceCode) {
+  public Movie(String title, Price price) {
     _title = title;
-    price = new Price(priceCode);
+    this.price = price;
   }
 
   public int getPriceCode() {
     return price.priceCode();
   }
 
-  public void setPriceCode(int priceCode) {
-    price = new Price(priceCode);
-  }
 
   public String getTitle() {
     return _title;

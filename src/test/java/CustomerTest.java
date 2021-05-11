@@ -8,12 +8,12 @@ public class CustomerTest {
   public void test() {
     Customer customer = new Customer("Bob");
 
-    customer.addRental(new Rental(new Movie("Jaws", Movie.REGULAR), 2));
-    customer.addRental(new Rental(new Movie("GoldenEye", Movie.REGULAR), 3));
-    customer.addRental(new Rental(new Movie("ShortNew", Movie.NEW_RELEASE), 1));
-    customer.addRental(new Rental(new Movie("LongNew", Movie.NEW_RELEASE), 2));
-    customer.addRental(new Rental(new Movie("Bambi", Movie.CHILDRENS), 3));
-    customer.addRental(new Rental(new Movie("Toy Story", Movie.CHILDRENS), 4));
+    customer.addRental(new Rental(new Movie("Jaws", Price.regularPrice()), 2));
+    customer.addRental(new Rental(new Movie("GoldenEye", Price.regularPrice()), 3));
+    customer.addRental(new Rental(new Movie("ShortNew", Price.newReleasePrice()), 1));
+    customer.addRental(new Rental(new Movie("LongNew", Price.newReleasePrice()), 2));
+    customer.addRental(new Rental(new Movie("Bambi", Price.childrensPrice()), 3));
+    customer.addRental(new Rental(new Movie("Toy Story", Price.childrensPrice()), 4));
 
     assertEquals("Rental Record for Bob\n" +
       "\tJaws\t2.0\n" +
