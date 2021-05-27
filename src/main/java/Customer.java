@@ -34,7 +34,7 @@ public class Customer {
     return totalRenterPoints;
   }
 
-  public String statement(Statement statement) {
+  public String statement(TextStatement statement) {
     return statement.statement(getName(), this.rentals, totalAmount(this.rentals), frequentRenterPoints(this.rentals));
   }
 
