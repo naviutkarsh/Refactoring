@@ -6,6 +6,7 @@ Refactoring steps for Video Rental
 - [ ] Replace vector with and ArrayList.
 - [ ] Extract Frequent Renter points. Duplicate the loop once.
 - [ ] Extract Total Amount out of the loop. Duplicate loop once more.
+
 —— [checkpoint-1-loop-broken](https://gitlab.com/tw-he-dev-bootcamp/base-repos/video-rental/-/tree/checkpoint-1-loop-broken)
 - [ ] Move Method Refactoring. 
     - [ ] Move Amount method to Rental 
@@ -13,6 +14,7 @@ Refactoring steps for Video Rental
 - [ ] Introduce Price as a class, with Price code parameter.
 - [ ] Move amount which depends on the pricing to it.
 - [ ] Eliminate PriceCode in Movie class. 
+
 —— [checkpoint-2-extract-price](https://gitlab.com/tw-he-dev-bootcamp/base-repos/video-rental/-/tree/checkpoint-2-extract-price)
 - [ ] Replace Switch Conditional with Polymorphism on Price class, by adding subclass based on movie type.
 - [ ] Simplify and eliminate Conditionals in the calculation of frequent reenter points by moving it down to Price class.
